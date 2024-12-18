@@ -4,7 +4,7 @@ talosVersion: v1.8.3
 # renovate: datasource=docker depName=ghcr.io/siderolabs/kubelet
 kubernetesVersion: v1.31.2
 endpoint: https://${VIP}:6443
-allowSchedulingOnControlPlanes: false
+allowSchedulingOnControlPlanes: true
 additionalMachineCertSans:
     - 127.0.0.1
     - ${VIP}
@@ -84,16 +84,13 @@ nodes:
         - 149.112.112.112
       installDiskSelector:
         size: <= 300GB
-      networkInterfaces:
-        # suffix is the adapter mac adres.
-        - interface: eth0
-          addresses:
-            - ${WORKER1IP_CIDR}
-          routes:
-            - network: 0.0.0.0/0
-              gateway: ${GATEWAY}
-          vip:
-            ip: ${VIP}
+      schematic:
+        customization:
+            systemExtensions:
+                officialExtensions:
+                    - siderolabs/intel-ucode
+                    - siderolabs/util-linux-tools
+                    - siderolabs/iscsi-tools
 controlPlane:
     patches:
         - '@./patches/controlplane.yaml'
@@ -148,7 +145,6 @@ worker:
                 officialExtensions:
                     - siderolabs/util-linux-tools
                     - siderolabs/iscsi-tools
-                    - siderolabs/qemu-guest-agent
     machineFiles:
     - content: |
         [plugins."io.containerd.grpc.v1.cri"]
