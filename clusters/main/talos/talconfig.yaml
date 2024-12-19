@@ -28,8 +28,7 @@ nodes:
       nameservers:
         - 9.9.9.9
         - 149.112.112.112
-      installDiskSelector:
-        size: <= 300GB
+      installDisk: /dev/sda
       networkInterfaces:
         # suffix is the adapter mac adres.
         - interface: eth0
@@ -46,8 +45,7 @@ nodes:
       nameservers:
         - 9.9.9.9
         - 149.112.112.112
-      installDiskSelector:
-        size: <= 300GB
+      installDisk: /dev/sda
       networkInterfaces:
         # suffix is the adapter mac adres.
         - interface: eth0
@@ -64,8 +62,7 @@ nodes:
       nameservers:
         - 9.9.9.9
         - 149.112.112.112
-      installDiskSelector:
-        size: <= 300GB
+      installDisk: /dev/sda
       networkInterfaces:
         # suffix is the adapter mac adres.
         - interface: eth0
@@ -82,8 +79,11 @@ nodes:
       nameservers:
         - 9.9.9.9
         - 149.112.112.112
-      installDiskSelector:
-        size: <= 300GB
+      installDisk: /dev/sda
+      machineDisks:
+        - device: /dev/sdb
+          partitions:
+            - mountpoint: /var/mnt/longhorn
       schematic:
         customization:
             systemExtensions:

@@ -36,3 +36,11 @@ spec:
         defaultClass: true
         # Increase to 3 for a multi-node cluster
         defaultClassReplicaCount: 1
+      service:
+        ui:
+            # -- Service type for Longhorn UI. (Options: "ClusterIP", "NodePort", "LoadBalancer", "Rancher-Proxy")
+            type: LoadBalancer
+            loadBalancerIP: ${LONGHORNIP}
+            ports:
+                main:
+                    port: 80
