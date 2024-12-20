@@ -145,18 +145,5 @@ spec:
             certificateIssuer: domain-0-le-staging
           traefik:
             enabled: true
-            middlewares:
-              - name: local
-                namespace: traefik
-              - name: bouncer
-                namespace: traefik
-              - name: auth
-                namespace: traefik
-            entrypoints:
-              - websecure
-            enableFixedMiddlewares: true
             forceTLS: true
             allowCors: false
-            fixedMiddlewares:
-              - name: chain-basic
-                namespace: ""
