@@ -121,9 +121,6 @@ spec:
             certificateIssuer: domain-0-le-staging
           traefik:
             enabled: true
-            middlewares:
-              - name: bouncer
-                namespace: traefik
         hosts:
           - host: vaultwarden.${DOMAIN_0}
             paths:
