@@ -71,7 +71,7 @@ spec:
         disableAdminToken: false
         token: ${VAULTWARDENTOKEN}
       smtp:
-        enabled: true
+        enabled: false
         host: "${SMTPHOST}"
         from: "${NOREPLYADDRESS}"
         fromName: "${NOREPLYADDRESS}"
