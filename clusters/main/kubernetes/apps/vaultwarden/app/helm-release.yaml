@@ -71,10 +71,10 @@ spec:
         disableAdminToken: false
         token: ${VAULTWARDENTOKEN}
       smtp:
-        enabled: false
+        enabled: true
         host: "${SMTPHOST}"
         from: "${NOREPLYADDRESS}"
-        fromName: "${NOREPLYADDRESS}"
+        fromName: "Vaultwarden"
         security: "FORCE_TLS"
         port: 465
         user: "${SMTPUSER}"
