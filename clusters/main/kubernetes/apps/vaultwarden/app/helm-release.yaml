@@ -5,7 +5,7 @@ metadata:
   name: vaultwarden
   namespace: vaultwarden
 spec:
-  interval: 3m
+  interval: 15m
   chart:
     spec:
       chart: vaultwarden
@@ -14,7 +14,7 @@ spec:
         kind: HelmRepository
         name: truecharts
         namespace: flux-system
-      interval: 3m
+      interval: 15m
   timeout: 20m
   maxHistory: 3
   driftDetection:
