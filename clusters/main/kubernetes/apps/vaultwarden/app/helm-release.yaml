@@ -74,7 +74,7 @@ spec:
         enabled: true
         host: "${SMTPHOST}"
         from: "${NOREPLYADDRESS}"
-        fromName: "Vaultwarden"
+        fromName: "${NOREPLYADDRESS}"
         security: "force_tls"
         port: 465
         user: "${SMTPUSER}"
