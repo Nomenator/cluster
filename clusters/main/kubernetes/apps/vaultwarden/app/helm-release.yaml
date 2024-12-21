@@ -50,11 +50,11 @@ spec:
         secretKey: "${S3KEY}"
         encrKey: "${S3KEY}"
     vaultwarden:
-      allowSignups: false
+      allowSignups: true
       #signupDomains:
-      verifySignup: false
-      requireEmail: false
-      allowInvitation: false
+      verifySignup: true
+      requireEmail: true
+      allowInvitation: true
       defaultInviteName: "HomeOrg"
       showPasswordHint: true
       enableWebVault: true
@@ -66,22 +66,21 @@ spec:
       # attachmentLimitUser:
       ## HaveIBeenPwned API Key. Can be purchased at https://haveibeenpwned.com/API/Key.
        # hibpApiKey:
-
       admin:
         enabled: true
         disableAdminToken: false
         token: ${VAULTWARDENTOKEN}
-      # smtp:
-      #   enabled: true
-      #   host: "${SMTPHOST}"
-      #   from: "${NOREPLYADDRESS}"
-      #   fromName: "Vaultwarden"
-      #   security: starttls
-      #   port: 587
-      #   # authMechanism: Plain
-      #   # heloName: ""
-      #   user: "${SMTPLOGIN}"
-      #   password: "${SMTPPASS}"
+      smtp:
+        enabled: true
+        host: "${SMTPHOST}"
+        from: "${NOREPLYADDRESS}"
+        fromName: "${NOREPLYADDRESS}"
+        heloName: "vaultwarden.${DOMAIN_0}"
+        security: "force_tls"
+        port: 465
+        user: "${SMTPUSER}"
+        password: "${SMTPPASS}"
+        authMechanism: Login
       yubico:
         enabled: false
       push:
@@ -121,9 +120,6 @@ spec:
             certificateIssuer: domain-0-le-staging
           traefik:
             enabled: true
-            middlewares:
-              - name: bouncer
-                namespace: traefik
         hosts:
           - host: vaultwarden.${DOMAIN_0}
             paths:
@@ -145,18 +141,5 @@ spec:
             certificateIssuer: domain-0-le-staging
           traefik:
             enabled: true
-            middlewares:
-              - name: local
-                namespace: traefik
-              - name: bouncer
-                namespace: traefik
-              - name: auth
-                namespace: traefik
-            entrypoints:
-              - websecure
-            enableFixedMiddlewares: true
             forceTLS: true
             allowCors: false
-            fixedMiddlewares:
-              - name: chain-basic
-                namespace: ""
