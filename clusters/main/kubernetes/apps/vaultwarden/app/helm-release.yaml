@@ -80,6 +80,7 @@ spec:
         port: 465
         user: "${SMTPUSER}"
         password: "${SMTPPASS}"
+        authMechanism: Login
       yubico:
         enabled: false
       push:
