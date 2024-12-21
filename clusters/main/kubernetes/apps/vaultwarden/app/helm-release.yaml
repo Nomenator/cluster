@@ -71,14 +71,14 @@ spec:
         disableAdminToken: false
         token: ${VAULTWARDENTOKEN}
       smtp:
-        enabled: false
-        host: ${SMTPHOST}
-        from: ${NOREPLYADDRESS}
-        fromName: ${NOREPLYADDRESS}
+        enabled: true
+        host: "${SMTPHOST}"
+        from: "${NOREPLYADDRESS}"
+        fromName: "${NOREPLYADDRESS}"
         security: "FORCE_TLS"
         port: 465
-        user: ${SMTPUSER}
-        password: ${SMTPPASS}
+        user: "${SMTPUSER}"
+        password: "${SMTPPASS}"
       yubico:
         enabled: false
       push:
