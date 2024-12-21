@@ -50,11 +50,11 @@ spec:
         secretKey: "${S3KEY}"
         encrKey: "${S3KEY}"
     vaultwarden:
-      allowSignups: false
+      allowSignups: true
       #signupDomains:
-      verifySignup: false
-      requireEmail: false
-      allowInvitation: false
+      verifySignup: true
+      requireEmail: true
+      allowInvitation: true
       defaultInviteName: "HomeOrg"
       showPasswordHint: true
       enableWebVault: true
@@ -75,7 +75,7 @@ spec:
         host: "${SMTPHOST}"
         from: "${NOREPLYADDRESS}"
         fromName: "Vaultwarden"
-        security: "FORCE_TLS"
+        security: "force_tls"
         port: 465
         user: "${SMTPUSER}"
         password: "${SMTPPASS}"
