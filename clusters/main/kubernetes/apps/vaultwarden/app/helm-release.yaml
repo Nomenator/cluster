@@ -75,6 +75,7 @@ spec:
         host: "${SMTPHOST}"
         from: "${NOREPLYADDRESS}"
         fromName: "${NOREPLYADDRESS}"
+        heloName: "vaultwarden.${DOMAIN_0}"
         security: "force_tls"
         port: 465
         user: "${SMTPUSER}"
