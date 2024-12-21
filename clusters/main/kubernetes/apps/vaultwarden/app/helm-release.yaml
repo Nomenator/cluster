@@ -50,10 +50,10 @@ spec:
         secretKey: "${S3KEY}"
         encrKey: "${S3KEY}"
     vaultwarden:
-      allowSignups: true
+      allowSignups: false
       #signupDomains:
-      verifySignup: true
-      requireEmail: true
+      verifySignup: false
+      requireEmail: false
       allowInvitation: false
       defaultInviteName: "HomeOrg"
       showPasswordHint: true
