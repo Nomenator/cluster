@@ -92,6 +92,10 @@ spec:
             targetPort: 8443
       comm:
         enabled: true
+        type: LoadBalancer
+        annotations:
+          metallb.universe.tf/allow-shared-ip: "UBNT-${UBNTIP}"
+          metallb.universe.tf/loadBalancerIPs: ${UBNTIP}
         ports:
           comm:
             enabled: true
