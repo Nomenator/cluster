@@ -61,7 +61,7 @@ spec:
               enabled: true
       media:
         enabled: true
-        mountpath: "/media"
+        mountPath: "/media"
         type: pvc
         targetSelectAll: true
         static:
