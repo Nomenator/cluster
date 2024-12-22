@@ -59,6 +59,12 @@ spec:
               enabled: true
             src:
               enabled: true
+      media:
+        enabled: true
+        mountPath: "/media"
+        type: nfs
+        server: "${NASIP}"
+        share: "${MEDIAMOUNTPATH}"
     ingress:
       main:
         enabled: true
