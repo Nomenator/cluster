@@ -99,7 +99,7 @@ spec:
             targetPort: 8080
       stun:
         enabled: true
-        type: LoadBlancer
+        type: LoadBalancer
         annotations:
           metallb.universe.tf/allow-shared-ip: "UBNT-${UBNTIP}"
           metallb.universe.tf/loadBalancerIPs: ${UBNTIP}
@@ -111,7 +111,7 @@ spec:
             protocol: udp
       speedtest:
         enabled: true
-        type: LoadBlancer
+        type: LoadBalancer
         annotations:
           metallb.universe.tf/allow-shared-ip: "UBNT-${UBNTIP}"
           metallb.universe.tf/loadBalancerIPs: ${UBNTIP}
