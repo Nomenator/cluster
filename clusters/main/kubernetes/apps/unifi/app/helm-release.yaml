@@ -29,6 +29,17 @@ spec:
   uninstall:
     keepHistory: false
   values:
+    controllers:
+      defaultPodOptions:
+        affinity:
+          nodeAffinity:
+            requiredDuringSchedulingIgnoredDuringExecution:
+              nodeSelectorTerms:
+                - matchExpressions:
+                    - key: topology.kubernetes.io/zone
+                      operator: In
+                      values: 
+                        - "lemnos"
     credentials:
         s3:
           type: s3
