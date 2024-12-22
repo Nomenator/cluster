@@ -64,7 +64,7 @@ spec:
         mountPath: "/media"
         type: nfs
         server: "${NASIP}"
-        share: "${MEDIAMOUNTPATH}"
+        path: "${MEDIAMOUNTPATH}"
     ingress:
       main:
         enabled: true
