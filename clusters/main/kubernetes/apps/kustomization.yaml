@@ -5,3 +5,4 @@ resources:
   - vaultwarden/ks.yaml
   - cloudflareddns/ks.yaml  
   - unifi/ks.yaml
+  - jellyfin/ks.yaml
