@@ -7,3 +7,4 @@ resources:
   - unifi/ks.yaml
   - jellyfin/ks.yaml
   - nextcloud/ks.yaml
+  - satisfactory/ks.yaml

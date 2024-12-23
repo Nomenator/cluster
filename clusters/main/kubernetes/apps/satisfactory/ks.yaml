@@ -1,0 +1,12 @@
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: satisfactory
+  namespace: flux-system
+spec:
+  interval: 24h
+  path: clusters/main/kubernetes/apps/satisfactory/app
+  prune: true
+  sourceRef:
+    kind: GitRepository
+    name: cluster
