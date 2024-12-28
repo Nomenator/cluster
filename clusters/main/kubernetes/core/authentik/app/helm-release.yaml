@@ -41,58 +41,58 @@ spec:
     persistence:
       blueprints:
         volsync:
-          - credentials: s3
+          - name: blueprints
+            type: restic
+            credentials: s3
             dest:
               enabled: true
-            name: blueprints
             src:
               enabled: true
-            type: restic
       certs:
         volsync:
-          - credentials: s3
+          - name: certs
+            type: restic
+            credentials: s3
             dest:
               enabled: true
-            name: certs
             src:
               enabled: true
-            type: restic
       geoip:
         volsync:
-          - credentials: s3
+          - name: geo-ip
+            type: restic
+            credentials: s3
             dest:
               enabled: true
-            name: geo-ip
             src:
               enabled: true
-            type: restic
       media:
         volsync:
-          - credentials: s3
+          - name: media
+            credentials: s3
+            type: restic
             dest:
               enabled: true
-            name: media
             src:
               enabled: true
-            type: restic
       templates:
         volsync:
-          - credentials: s3
+          - name: templates
+            credentials: s3
+            type: restic
             dest:
               enabled: true
-            name: templates
             src:
               enabled: true
-            type: restic
     cnpg:
       main:
         backups:
-          credentials: s3
           enabled: true
+          credentials: s3
           retentionPolicy: ""
         recovery:
-          credentials: s3
           enabled: true
+          credentials: s3
         user: authentik
     ingress:
       main:
