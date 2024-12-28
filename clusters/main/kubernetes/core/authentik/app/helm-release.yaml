@@ -106,14 +106,14 @@ spec:
             paths:
               - path: /outpost.goauthentik.io
                 pathType: Prefix
-      integrations:
+        integrations:
           certManager:
-              certificateIssuer: domain-0-le-staging
-              enabled: true
+            enabled: true
+            certificateIssuer: domain-0-le-staging
           traefik:
-              enabled: true
-              entrypoints:
-                  - websecure
+            enabled: true
+            entrypoints:
+                - websecure
     authentik:
       credentials:
         email: ${NOREPLYADDRESS}
