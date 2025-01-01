@@ -8,3 +8,4 @@ resources:
   - jellyfin/ks.yaml
   - nextcloud/ks.yaml
   - satisfactory/ks.yaml
+  - longhorn-es/ks.yaml
