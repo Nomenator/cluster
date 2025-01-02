@@ -49,10 +49,36 @@ spec:
           secretKey: "${S3KEY}"
           encrKey: "${S3KEY}"
     persistence:
+      config:
+        volsync:
+          - name: config
+            type: restic
+            credentials: s3
+            dest:
+              enabled: true
+            src:
+              enabled: true
+      html:
+        volsync:
+          - name: html
+            type: restic
+            credentials: s3
+            dest:
+              enabled: true
+            src:
+              enabled: true
       data:
         type: nfs
         server: "${NASIP}"
         path: "${NCDATAPATH}"
+    cnpg:
+      main:
+        backups:
+          enabled: true
+          credentials: s3
+        recovery:
+          credentials: s3
+          enabled: true
     ingress:
       main:
         enabled: true
