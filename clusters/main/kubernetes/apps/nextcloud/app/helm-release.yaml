@@ -30,13 +30,13 @@ spec:
     keepHistory: false
   values:
     credentials:
-        s3:
-          type: s3
-          url: "${S3URL}"
-          bucket: "${S3BUCKETNAME}"
-          accessKey: "${S3ID}"
-          secretKey: "${S3KEY}"
-          encrKey: "${S3KEY}"
+      s3:
+        type: s3
+        url: "${S3URL}"
+        bucket: "${S3BUCKETNAME}"
+        accessKey: "${S3ID}"
+        secretKey: "${S3KEY}"
+        encrKey: "${S3KEY}"
     persistence:
       config:
         volsync:
