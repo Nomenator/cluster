@@ -29,17 +29,6 @@ spec:
   uninstall:
     keepHistory: false
   values:
-    controllers:
-      defaultPodOptions:
-        affinity:
-          nodeAffinity:
-            requiredDuringSchedulingIgnoredDuringExecution:
-              nodeSelectorTerms:
-                - matchExpressions:
-                    - key: topology.kubernetes.io/zone
-                      operator: In
-                      values: 
-                        - "lemnos"
     credentials:
         s3:
           type: s3
@@ -50,13 +39,39 @@ spec:
           encrKey: "${S3KEY}"
     persistence:
       config:
-        type: nfs
-        server: "${NASIP}"
-        path: "${NCCONFIGPATH}"
+        volsync:
+          - name: config
+            type: restic
+            cleanupTempPVC: true
+            cleanupCachePVC: true
+            credentials: s3
+            dest:
+              enabled: true
+            src:
+              enabled: false
+      html:
+        volsync:
+          - name: html
+            type: restic
+            cleanupTempPVC: true
+            cleanupCachePVC: true
+            credentials: s3
+            dest:
+              enabled: true
+            src:
+              enabled: false
       data:
         type: nfs
         server: "${NASIP}"
         path: "${NCDATAPATH}"
+    cnpg:
+      main:
+        backups:
+          enabled: true
+          credentials: s3
+        recovery:
+            method: object_store
+            credentials: s3
     ingress:
       main:
         enabled: true
