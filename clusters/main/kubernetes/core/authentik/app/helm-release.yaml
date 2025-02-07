@@ -85,14 +85,14 @@ spec:
               enabled: true
     cnpg:
       main:
-        mode: standalone
+        mode: recovery
         backups:
           enabled: true
-          revision: "3"
+          revision: "4"
           credentials: s3
         recovery:
           method: object_store
-          revision: "2"
+          revision: "3"
           credentials: s3
     ingress:
       main:
