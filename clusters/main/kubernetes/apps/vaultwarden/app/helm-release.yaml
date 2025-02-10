@@ -59,7 +59,7 @@ spec:
       showPasswordHint: true
       enableWebVault: true
       # Restrict creation of orgs. Options are: 'all', 'none' or a comma-separated list of users.
-      orgCreationUsers: none
+      orgCreationUsers: all
       ## Limit attachment disk usage per organization.
       # attachmentLimitOrg:
       ## Limit attachment disk usage per user.
