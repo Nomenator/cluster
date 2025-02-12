@@ -105,8 +105,10 @@ spec:
               enabled: true
     cnpg:
       main:
+        mode: recovery
         backups:
           enabled: true
+          revision: "1"
           credentials: s3
         recovery:
           credentials: s3
