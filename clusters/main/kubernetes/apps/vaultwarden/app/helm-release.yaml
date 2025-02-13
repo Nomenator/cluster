@@ -108,10 +108,11 @@ spec:
         mode: recovery
         backups:
           enabled: true
-          revision: "1"
+          revision: "2"
           credentials: s3
         recovery:
           credentials: s3
+          revision: "1"
           enabled: true
     ingress:
       main:
