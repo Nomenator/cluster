@@ -68,7 +68,7 @@ spec:
         integrations:
           certManager:
             enabled: true
-            certificateIssuer: domain-0-le-staging
+            certificateIssuer: domain-0-le-prod
           traefik:
             enabled: true
         hosts:
@@ -81,7 +81,7 @@ spec:
         integrations:
           certManager:
             enabled: true
-            certificateIssuer: domain-0-le-staging
+            certificateIssuer: domain-0-le-prod
           traefik:
             enabled: true
         hosts:
