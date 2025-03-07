@@ -9,3 +9,4 @@ resources:
   - nextcloud/ks.yaml
   - satisfactory/ks.yaml
   - longhorn-es/ks.yaml
+  - ollama/ks.yaml  

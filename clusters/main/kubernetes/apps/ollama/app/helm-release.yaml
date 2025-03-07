@@ -1,0 +1,91 @@
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: ollama
+  namespace: ollama
+spec:
+  interval: 15m
+  chart:
+    spec:
+      chart: ollama
+      version: 7.11.14
+      sourceRef:
+        kind: HelmRepository
+        name: truecharts
+        namespace: flux-system
+      interval: 15m
+  timeout: 20m
+  maxHistory: 3
+  driftDetection:
+    mode: warn
+  install:
+    createNamespace: true
+    remediation:
+      retries: 3
+  upgrade:
+    cleanupOnFail: true
+    remediation:
+      retries: 3
+  uninstall:
+    keepHistory: false
+  values:
+    controllers:
+      defaultPodOptions:
+        affinity:
+          nodeAffinity:
+            requiredDuringSchedulingIgnoredDuringExecution:
+              nodeSelectorTerms:
+                - matchExpressions:
+                    - key: topology.kubernetes.io/zone
+                      operator: In
+                      values: 
+                        - "lemnos"
+    credentials:
+      minio:
+        type: s3
+        url: "${MINIOURL}"
+        bucket: "${MINIOBUCKETPREFIX}-ollama"
+        accessKey: "${MINIOID}"
+        secretKey: "${MINIOKEY}"
+        encrKey: "${MINIOKEY}"
+    persistence:
+      config:
+        volsync:
+          - name: config
+            type: restic
+            credentials: minio
+            dest:
+              enabled: true
+            src:
+              enabled: true
+      data:
+        type: nfs
+        server: "${NASIP}"
+        path: "${OLLAMADATAPATH}"
+    ingress:
+      main:
+        enabled: true
+        integrations:
+          certManager:
+            enabled: true
+            certificateIssuer: domain-0-le-staging
+          traefik:
+            enabled: true
+        hosts:
+          - host: ollama.${DOMAIN_0}
+            paths:
+              - path: /
+                pathType: Prefix
+      api:
+        enabled: true
+        integrations:
+          certManager:
+            enabled: true
+            certificateIssuer: domain-0-le-staging
+          traefik:
+            enabled: true
+        hosts:
+          - host: ollama-api.${DOMAIN_0}
+            paths:
+              - path: /
+                pathType: Prefix
