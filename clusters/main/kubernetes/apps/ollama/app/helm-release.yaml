@@ -48,6 +48,13 @@ spec:
         accessKey: "${MINIOID}"
         secretKey: "${MINIOKEY}"
         encrKey: "${MINIOKEY}"
+    workload:
+      main:
+        podSpec:
+          containers:
+            main:
+              env:
+                ENV: "dev"
     persistence:
       config:
         volsync:
