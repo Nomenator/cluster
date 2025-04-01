@@ -49,10 +49,10 @@ spec:
         secretKey: "${MINIOKEY}"
         encrKey: "${MINIOKEY}"
     workload:
-      main:
+      ui:
         podSpec:
           containers:
-            main:
+            ui:
               env:
                 ENV: "dev"
     persistence:
