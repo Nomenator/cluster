@@ -48,7 +48,13 @@ spec:
         accessKey: "${MINIOID}"
         secretKey: "${MINIOKEY}"
         encrKey: "${MINIOKEY}"
+    resources:
+      limits:
+        nvidia.com/gpu: 2
     workload:
+      main:
+        podSpec:
+          runtimeClassName: "nvidia"
       ui:
         podSpec:
           containers:
