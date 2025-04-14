@@ -92,11 +92,6 @@ nodes:
             - mountpoint: /var/mnt/disk2
       nodeLabels:
         topology.kubernetes.io/zone: "lemnos"
-      #   node.longhorn.io/create-default-disk: "config"
-      # nodeAnnotations:
-      #   node.longhorn.io/default-disks-config: '[{"path":"/var/lib/longhorn","allowScheduling":true, "tags":["ssd", "fast"]},
-      #     {"name":"sdb","path":"/var/mnt/disk2","allowScheduling":true,"storageReserved":1024,"tags":["ssd","fast"]}]'
-      #   node.longhorn.io/default-node-tags: '["fast", "storage"]'
       schematic:
         customization:
             systemExtensions:
