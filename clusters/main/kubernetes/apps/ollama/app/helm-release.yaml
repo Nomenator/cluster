@@ -92,12 +92,13 @@ spec:
                 pathType: Prefix
       api:
         enabled: true
+        ingressClassName: external
         integrations:
           certManager:
             enabled: true
             certificateIssuer: domain-0-le-prod
           traefik:
-            enabled: true
+            enabled: false
         hosts:
           - host: ollama-api.${DOMAIN_0}
             paths:

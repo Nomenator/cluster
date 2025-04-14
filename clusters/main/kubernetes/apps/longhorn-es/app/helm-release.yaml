@@ -49,8 +49,3 @@ spec:
             certificateIssuer: domain-0-le-staging
           traefik:
             enabled: false
-            entrypoints:
-              - websecure
-            middlewares:
-              - name: auth
-                namespace: "traefik"
