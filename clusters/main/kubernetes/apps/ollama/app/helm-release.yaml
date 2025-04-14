@@ -78,12 +78,13 @@ spec:
     ingress:
       main:
         enabled: true
+        ingressClassName: external
         integrations:
           certManager:
             enabled: true
             certificateIssuer: domain-0-le-prod
           traefik:
-            enabled: true
+            enabled: false
         hosts:
           - host: ollama.${DOMAIN_0}
             paths:

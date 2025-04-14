@@ -68,12 +68,13 @@ spec:
     ingress:
       main:
         enabled: true
+        ingressClassName: external
         integrations:
           certManager:
             enabled: true
             certificateIssuer: domain-0-le-staging
           traefik:
-            enabled: true
+            enabled: false
         hosts:
           - host: antinetflix.${DOMAIN_0}
             paths:

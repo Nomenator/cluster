@@ -106,12 +106,13 @@ spec:
     ingress:
       main:
         enabled: true
+        ingressClassName: external
         integrations:
           certManager:
             enabled: true
             certificateIssuer: domain-0-le-prod
           traefik:
-            enabled: true
+            enabled: false
         hosts:
           - host: vaultwarden.${DOMAIN_0}
             paths:
@@ -119,6 +120,7 @@ spec:
                 pathType: Prefix
       admin:
         enabled: true
+        ingressClassName: external
         primary: false
         targetSelector:
           main: main
@@ -132,6 +134,6 @@ spec:
             enabled: true
             certificateIssuer: domain-0-le-prod
           traefik:
-            enabled: true
+            enabled: false
             forceTLS: true
             allowCors: false
