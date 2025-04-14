@@ -1,8 +1,8 @@
 clusterName: ${CLUSTERNAME}
 # renovate: datasource=docker depName=ghcr.io/siderolabs/installer
-talosVersion: v1.9.3
+talosVersion: v1.9.5
 # renovate: datasource=docker depName=ghcr.io/siderolabs/kubelet
-kubernetesVersion: v1.32.2
+kubernetesVersion: v1.32.3
 endpoint: https://${VIP}:6443
 allowSchedulingOnControlPlanes: true
 additionalMachineCertSans:
@@ -92,11 +92,6 @@ nodes:
             - mountpoint: /var/mnt/disk2
       nodeLabels:
         topology.kubernetes.io/zone: "lemnos"
-      #   node.longhorn.io/create-default-disk: "config"
-      # nodeAnnotations:
-      #   node.longhorn.io/default-disks-config: '[{"path":"/var/lib/longhorn","allowScheduling":true, "tags":["ssd", "fast"]},
-      #     {"name":"sdb","path":"/var/mnt/disk2","allowScheduling":true,"storageReserved":1024,"tags":["ssd","fast"]}]'
-      #   node.longhorn.io/default-node-tags: '["fast", "storage"]'
       schematic:
         customization:
             systemExtensions:
@@ -126,12 +121,7 @@ controlPlane:
                     - siderolabs/qemu-guest-agent
     machineFiles:
     - content: |
-        [plugins."io.containerd.grpc.v1.cri"]
-          enable_unprivileged_ports = true
-          enable_unprivileged_icmp = true
-        [plugins."io.containerd.grpc.v1.cri".containerd]
-          discard_unpacked_layers = false
-        [plugins."io.containerd.grpc.v1.cri".containerd.runtimes.runc]
+        [plugins."io.containerd.cri.v1.images"]
           discard_unpacked_layers = false
       permissions: 0
       path: /etc/cri/conf.d/20-customization.part
@@ -140,11 +130,8 @@ controlPlane:
         [ NFSMount_Global_Options ]
         nfsvers=4.2
         hard=True
+        nconnect=16
         noatime=True
-        nodiratime=True
-        rsize=131072
-        wsize=131072
-        nconnect=8
       permissions: 420
       path: /etc/nfsmount.conf
       op: overwrite
@@ -164,12 +151,7 @@ worker:
                     - siderolabs/iscsi-tools
     machineFiles:
     - content: |
-        [plugins."io.containerd.grpc.v1.cri"]
-          enable_unprivileged_ports = true
-          enable_unprivileged_icmp = true
-        [plugins."io.containerd.grpc.v1.cri".containerd]
-          discard_unpacked_layers = false
-        [plugins."io.containerd.grpc.v1.cri".containerd.runtimes.runc]
+        [plugins."io.containerd.cri.v1.images"]
           discard_unpacked_layers = false
       permissions: 0
       path: /etc/cri/conf.d/20-customization.part
@@ -178,11 +160,8 @@ worker:
         [ NFSMount_Global_Options ]
         nfsvers=4.2
         hard=True
+        nconnect=16
         noatime=True
-        nodiratime=True
-        rsize=131072
-        wsize=131072
-        nconnect=8
       permissions: 420
       path: /etc/nfsmount.conf
       op: overwrite

@@ -75,12 +75,13 @@ spec:
     ingress:
       main:
         enabled: true
+        ingressClassName: external
         integrations:
           certManager:
             enabled: true
             certificateIssuer: domain-0-le-prod
           traefik:
-            enabled: true
+            enabled: false
         hosts:
           - host: nextcloud.${DOMAIN_0}
             paths:
@@ -92,7 +93,7 @@ spec:
         initialAdminPassword: ${NCPASS}
       general:
         default_phone_region: CA
-        accessIP: "${TRAEFIK_IP}"
+        accessIP: "${NGINX_EXTERNAL_IP}"
       files:
         shared_folder_name: Shared
         max_chunk_size: 10485760
