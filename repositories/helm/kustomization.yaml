@@ -4,21 +4,34 @@ metadata:
   name: helm-repos
   namespace: flux-system
 resources:
+  - authentik.yaml
+  - backube.yaml
   - bjw-s.yaml
+  - cilium.yaml
   - cloudnative-pg.yaml
   - coredns.yaml
   - csi-driver-nfs.yaml
+  - descheduler.yaml
+  - ingress-nginx.yaml
   - intel.yaml
   - home-ops-mirror.yaml
   - jetstack.yaml
+  - k8s-at-home.yaml
   - kubernetes-sigs-metrics-server.yaml
   - kustomization.yaml
+  - longhorn.yaml
+  - node-feature-discovery.yaml
   - nvdp.yaml
   - nvidia.yaml
+  - metallb.yaml
+  - metrics-server.yaml
+  - openebs.yaml
   - piraeus.yaml
   - postfinance.yaml
   - prometheus-community.yaml
   - spegel.yaml
   - stakater.yaml
+  - tf-controller.yaml
   - truecharts.yaml
+  - truechartsoci.yaml
 # more goes here!
