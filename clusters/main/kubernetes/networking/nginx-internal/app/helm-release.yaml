@@ -38,7 +38,7 @@ spec:
                   - key: node-role.kubernetes.io/control-plane
                     operator: Exists
     controller:
-      replicaCount: 3
+      replicaCount: 1
       service:
         externalTrafficPolicy: Local
         annotations:
