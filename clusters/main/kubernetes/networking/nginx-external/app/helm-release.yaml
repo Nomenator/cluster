@@ -29,16 +29,8 @@ spec:
   uninstall:
     keepHistory: false
   values:
-    defaultPodOptions:
-      affinity:
-        nodeAffinity:
-          requiredDuringSchedulingIgnoredDuringExecution:
-            nodeSelectorTerms:
-              - matchExpressions:
-                  - key: node-role.kubernetes.io/control-plane
-                    operator: Exists
     controller:
-      replicaCount: 1
+      replicaCount: 2
       service:
         externalTrafficPolicy: Local
         annotations:
