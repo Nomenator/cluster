@@ -38,7 +38,17 @@ spec:
                 - key: topology.kubernetes.io/zone
                   operator: In
                   values: 
-                    - "lemnos"
+                    - "olympus"
+        podAntiAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            - podAffinityTerm:
+              labelSelector:
+                matchExpressions:
+                  - key: app.kubernetes.io/name
+                    operator: In
+                    values:
+                      - nginx-external
+              topologyKey: kubernetes.io/hostname
       replicaCount: 2
       service:
         externalTrafficPolicy: Local
