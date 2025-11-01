@@ -30,6 +30,17 @@ spec:
     keepHistory: false
   values:
     controller:
+      affinity:
+        podAntiAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            - podAffinityTerm:
+              labelSelector:
+                matchExpressions:
+                  - key: app.kubernetes.io/name
+                    operator: In
+                    values:
+                      - nginx-internal
+              topologyKey: kubernetes.io/hostname
       replicaCount: 2
       service:
         externalTrafficPolicy: Local
