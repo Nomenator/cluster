@@ -10,10 +10,10 @@ spec:
   chart:
     spec:
       chart: ingress-nginx
-      version: 4.13.3
+      version: 4.13.0
       sourceRef:
         kind: HelmRepository
-        name: ingress-nginx
+        name: home-ops-mirror
         namespace: flux-system
       interval: 15m
   timeout: 20m
@@ -30,25 +30,6 @@ spec:
     keepHistory: false
   values:
     controller:
-      affinity:
-        nodeAffinity:
-          requiredDuringSchedulingIgnoredDuringExecution:
-            nodeSelectorTerms:
-              - matchExpressions:
-                - key: topology.kubernetes.io/zone
-                  operator: In
-                  values: 
-                    - "olympus"
-        podAntiAffinity:
-          requiredDuringSchedulingIgnoredDuringExecution:
-            - podAffinityTerm:
-              labelSelector:
-                matchExpressions:
-                  - key: app.kubernetes.io/name
-                    operator: In
-                    values:
-                      - nginx-external
-              topologyKey: kubernetes.io/hostname
       replicaCount: 2
       service:
         externalTrafficPolicy: Local
@@ -96,7 +77,7 @@ spec:
         enabled: false
       resources:
         requests:
-          cpu: 100m
+          cpu: 75m
         limits:
           memory: 500Mi
     defaultBackend:
