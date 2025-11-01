@@ -9,10 +9,3 @@ sopssecret.yaml
 sopssecret*
 *sopssecret*
 mounts/
-*talconfig.json
-talconfig.json
-*patches/all.yaml
-patches/all.yaml
-kubeconfig
-*kubeconfig
-.DS_Store

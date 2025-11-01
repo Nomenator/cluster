@@ -2,11 +2,3 @@ apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 resources:
   - kubernetes-dashboard/ks.yaml
-  - vaultwarden/ks.yaml
-  - cloudflareddns/ks.yaml  
-  - unifi/ks.yaml
-  - jellyfin/ks.yaml
-  - nextcloud/ks.yaml
-  - satisfactory/ks.yaml
-  - longhorn-es/ks.yaml
-  - ollama/ks.yaml  
