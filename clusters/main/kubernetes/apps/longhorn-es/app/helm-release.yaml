@@ -8,29 +8,25 @@ spec:
   chart:
     spec:
       chart: external-service
-      version: 15.7.0
+      version: 16.8.0
       sourceRef:
         kind: HelmRepository
         name: truecharts
         namespace: flux-system
       interval: 15m
-  timeout: 20m
-  maxHistory: 3
-  driftDetection:
-    mode: warn
   install:
     createNamespace: true
+    crds: CreateReplace
     remediation:
       retries: 3
   upgrade:
-    cleanupOnFail: true
+    crds: CreateReplace
     remediation:
       retries: 3
-  uninstall:
-    keepHistory: false
   values:
     service:
       main:
+        enabled: true
         type: ExternalName
         externalName: longhorn-frontend.longhorn-system.svc.cluster.local
         ports:

@@ -28,7 +28,8 @@ nodes:
       nameservers:
         - 9.9.9.9
         - 149.112.112.112
-      installDisk: /dev/sda
+      installDiskSelector:
+        size: <= 1600GB
       nodeLabels:
         topology.kubernetes.io/zone: "olympus"
       networkInterfaces:
@@ -46,12 +47,12 @@ nodes:
       controlPlane: true
       nameservers:
         - 9.9.9.9
-        - 149.112.112.112
-      installDisk: /dev/sda
+        - 142.112.112.112
+      installDiskSelector:
+        size: <= 1600GB
       nodeLabels:
         topology.kubernetes.io/zone: "olympus"
       networkInterfaces:
-        # suffix is the adapter mac adres.
         - interface: eth0
           addresses:
             - ${MASTER2IP_CIDR}
@@ -66,7 +67,8 @@ nodes:
       nameservers:
         - 9.9.9.9
         - 149.112.112.112
-      installDisk: /dev/sda
+      installDiskSelector:
+        size: <= 1600GB
       nodeLabels:
         topology.kubernetes.io/zone: "olympus"
       networkInterfaces:
@@ -79,30 +81,6 @@ nodes:
               gateway: ${GATEWAY}
           vip:
             ip: ${VIP}
-    - hostname: k8s-worker-1
-      ipAddress: ${WORKER1IP_IP}
-      controlPlane: false
-      nameservers:
-        - 9.9.9.9
-        - 149.112.112.112
-      installDisk: /dev/sda
-      machineDisks:
-        - device: /dev/sdb
-          partitions:
-            - mountpoint: /var/mnt/disk2
-      nodeLabels:
-        topology.kubernetes.io/zone: "lemnos"
-      schematic:
-        customization:
-            systemExtensions:
-                officialExtensions:
-                    - siderolabs/nonfree-kmod-nvidia-lts
-                    - siderolabs/nvidia-container-toolkit-lts
-                    - siderolabs/intel-ucode
-                    - siderolabs/util-linux-tools
-                    - siderolabs/iscsi-tools
-      patches:
-        - '@./patches/nvidia.yaml'
 controlPlane:
     patches:
         - '@./patches/controlplane.yaml'
@@ -149,6 +127,7 @@ worker:
                 officialExtensions:
                     - siderolabs/util-linux-tools
                     - siderolabs/iscsi-tools
+                    - siderolabs/qemu-guest-agent
     machineFiles:
     - content: |
         [plugins."io.containerd.cri.v1.images"]
