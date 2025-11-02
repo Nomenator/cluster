@@ -8,7 +8,7 @@ spec:
   chart:
     spec:
       chart: authentik
-      version: 27.17.10
+      version: 33.31.3
       sourceRef:
         kind: HelmRepository
         name: truecharts
@@ -100,10 +100,7 @@ spec:
         ingressClassName: external
         hosts:
           - host: auth.${DOMAIN_0}
-            paths:
-              - path: /
-                pathType: Prefix
-          - host: '*.${DOMAIN_0}'
+          - host: request.${DOMAIN_0}
             paths:
               - path: /outpost.goauthentik.io
                 pathType: Prefix
@@ -111,10 +108,6 @@ spec:
           certManager:
             enabled: true
             certificateIssuer: domain-0-le-staging
-          traefik:
-            enabled: false
-            entrypoints:
-                - websecure
     authentik:
       credentials:
         email: ${NOREPLYADDRESS}

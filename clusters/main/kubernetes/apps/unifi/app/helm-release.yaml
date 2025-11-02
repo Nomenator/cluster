@@ -77,8 +77,6 @@ spec:
           certManager:
             enabled: true
             certificateIssuer: domain-0-le-staging
-          traefik:
-            enabled: false
         hosts:
           - host: unifi.${DOMAIN_0}
             paths:
