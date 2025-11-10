@@ -92,11 +92,11 @@ spec:
         mode: recovery
         backups:
           enabled: true
-          revision: "4"
+          revision: "5"
           credentials: s3
         recovery:
           credentials: s3
-          revision: "3"
+          revision: "4"
           enabled: true
     ingress:
       main:
@@ -105,7 +105,7 @@ spec:
         integrations:
           certManager:
             enabled: true
-            certificateIssuer: domain-0-le-staging
+            certificateIssuer: domain-0-le-prod
           traefik:
             enabled: false
         hosts:
@@ -127,6 +127,6 @@ spec:
         integrations:
           certManager:
             enabled: true
-            certificateIssuer: domain-0-le-staging
+            certificateIssuer: domain-0-le-prod
           traefik:
             enabled: false
