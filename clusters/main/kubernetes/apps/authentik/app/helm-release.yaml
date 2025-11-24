@@ -88,11 +88,11 @@ spec:
         mode: recovery
         backups:
           enabled: true
-          revision: "5"
+          revision: "6"
           credentials: s3
         recovery:
           method: object_store
-          revision: "4"
+          revision: "5"
           credentials: s3
     ingress:
       main:
