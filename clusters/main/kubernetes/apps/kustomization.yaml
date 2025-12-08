@@ -7,3 +7,4 @@ resources:
   - cloudflareddns/ks.yaml  
   - unifi/ks.yaml
   - authentik/ks.yaml
+  - jellyfin/ks.yaml
