@@ -3,7 +3,6 @@ kind: Kustomization
 resources:
   - kubernetes-dashboard/ks.yaml
   - longhorn-es/ks.yaml
-  - vaultwarden/ks.yaml
   - cloudflareddns/ks.yaml  
   - unifi/ks.yaml
   - authentik/ks.yaml
