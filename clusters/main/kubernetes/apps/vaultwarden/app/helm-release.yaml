@@ -96,7 +96,7 @@ spec:
           credentials: s3
         recovery:
           credentials: s3
-          revision: "5"
+          revision: "4"
           enabled: true
     ingress:
       main:
@@ -105,7 +105,7 @@ spec:
         integrations:
           certManager:
             enabled: true
-            certificateIssuer: domain-0-le-prod
+            certificateIssuer: domain-0-le-staging
           traefik:
             enabled: false
         hosts:
@@ -127,6 +127,6 @@ spec:
         integrations:
           certManager:
             enabled: true
-            certificateIssuer: domain-0-le-prod
+            certificateIssuer: domain-0-le-staging
           traefik:
             enabled: false
