@@ -8,3 +8,4 @@ resources:
   - unifi/ks.yaml
   - authentik/ks.yaml
   - jellyfin/ks.yaml
+  - nextcloud/ks.yaml
