@@ -76,6 +76,27 @@ nodes:
               gateway: ${GATEWAY}
           vip:
             ip: ${VIP}
+    - hostname: k8s-worker-1
+      ipAddress: ${WORKER1IP_IP}
+      controlPlane: false
+      nameservers:
+        - 9.9.9.9
+        - 149.112.112.112
+      installDiskSelector:
+        size: <= 1600GB
+      nodeLabels:
+        topology.kubernetes.io/zone: "lemnos"
+      schematic:
+        customization:
+            systemExtensions:
+                officialExtensions:
+                    - siderolabs/nonfree-kmod-nvidia-lts
+                    - siderolabs/nvidia-container-toolkit-lts
+                    - siderolabs/intel-ucode
+                    - siderolabs/util-linux-tools
+                    - siderolabs/iscsi-tools
+      patches:
+        - '@./patches/nvidia.yaml'
 controlPlane:
     patches:
         - '@./patches/controlplane.yaml'
