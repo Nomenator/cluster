@@ -77,10 +77,30 @@ spec:
         cache: 0
     persistence:
       data:
-        enabled: true
+        volsync:
+        - name: data
+          type: restic
+          credentials: s3
+          dest:
+            enabled: true
+          src:
+            enabled: false
+            trigger:
+              schedule: 40 1 * * *
     cnpg:
       main:
-        enabled: true
+        cluster:
+          singleNode: true
+        mode: standalone
+        backups:
+          enabled: true
+          credentials: s3
+          scheduledBackups:
+            - name: daily-backup
+              schedule: "0 5 0 * * *"
+              backupOwnerReference: self
+              immediate: true
+              suspend: false
     ingress:
       main:
         enabled: true
