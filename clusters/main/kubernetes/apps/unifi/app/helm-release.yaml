@@ -1,0 +1,56 @@
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: unifi
+  namespace: external-services
+spec:
+  interval: 15m
+  chart:
+    spec:
+      chart: external-service
+      version: 16.17.0
+      sourceRef:
+        kind: HelmRepository
+        name: truecharts
+        namespace: flux-system
+      interval: 15m
+  timeout: 20m
+  maxHistory: 3
+  driftDetection:
+    mode: warn
+  install:
+    createNamespace: true
+    remediation:
+      retries: 3
+  upgrade:
+    cleanupOnFail: true
+    remediation:
+      retries: 3
+  uninstall:
+    keepHistory: false
+  values:
+    TZ: America/New_York
+    ingress:
+      main:
+        enabled: true
+        ingressClassName: external
+        integrations:
+          certManager:
+            enabled: true
+            certificateIssuer: domain-0-le-staging
+          traefik:
+            enabled: false
+        hosts:
+          - host: unifi.${DOMAIN_0}
+            paths:
+              - path: /
+                pathType: Prefix
+    service:
+      main:
+        type: ExternalIP
+        externalIp: {UBNTIP}
+        ports:
+          main:
+            protocol: https
+            port: 443
+            targetPort: 30072
