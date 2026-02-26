@@ -52,5 +52,4 @@ spec:
         ports:
           main:
             protocol: https
-            port: 443
-            targetPort: 30072
+            port: 30072
