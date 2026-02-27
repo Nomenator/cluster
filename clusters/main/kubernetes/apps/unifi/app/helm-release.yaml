@@ -51,5 +51,4 @@ spec:
         externalIp: {UBNTIP}
         ports:
           main:
-            protocol: https
-            port: 30072
+            protocol: http
