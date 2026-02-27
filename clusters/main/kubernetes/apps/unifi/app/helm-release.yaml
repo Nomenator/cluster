@@ -48,7 +48,8 @@ spec:
     service:
       main:
         type: ExternalIP
-        externalIp: {UBNTIP}
+        externalIp: ${UBNTIP}
         ports:
           main:
             protocol: http
+            port: 80
