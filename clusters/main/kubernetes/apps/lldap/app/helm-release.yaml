@@ -45,21 +45,21 @@ spec:
           integrations:
             certManager:
               enabled: true
-              certificateIssuer: domain-1-le-staging
+              certificateIssuer: domain-0-le-staging
           hosts:
-            - host: lldap.${DOMAIN_1}
+            - host: lldap.${DOMAIN_0}
     workload:
       main:
         podSpec:
           containers:
             main:
               env:
-                LLDAP_HTTP_URL: https://lldap.${DOMAIN_1}
+                LLDAP_HTTP_URL: https://lldap.${DOMAIN_0}
                 LLDAP_LDAP_BASE_DN: ${LLDAPDN}
                 LLDAP_LDAP_USER_DN: admin
-                LLDAP_LDAP_USER_EMAIL: admin@${DOMAIN_1}
+                LLDAP_LDAP_USER_EMAIL: admin@${DOMAIN_0}
                 LLDAP_LDAP_USER_PASS: ${AUTHPASS}
-                LLDAP_SMTP_OPTIONS__FROM: LLDAP Admin <lldap@${DOMAIN_1}>
+                LLDAP_SMTP_OPTIONS__FROM: lldap@${DOMAIN_0}
                 LLDAP_SMTP_OPTIONS__PASSWORD: ${SMTPPASS}
                 LLDAP_SMTP_OPTIONS__PORT: 587
                 LLDAP_SMTP_OPTIONS__REPLY_TO: ${NOREPLYADDRESS}
