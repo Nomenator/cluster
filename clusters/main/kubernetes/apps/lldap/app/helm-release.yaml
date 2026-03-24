@@ -1,0 +1,97 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: lldap
+  namespace: lldap
+spec:
+  interval: 15m
+  chart:
+    spec:
+      chart: lldap
+      version: 9.0.0
+      sourceRef:
+        kind: HelmRepository
+        name: truecharts
+        namespace: flux-system
+      interval: 15m
+  timeout: 5m
+  maxHistory: 3
+  install:
+    createNamespace: true
+    remediation:
+      retries: 3
+  upgrade:
+    cleanupOnFail: true
+    remediation:
+      retries: 3
+  uninstall:
+    keepHistory: false
+  values:
+    global:
+      stopAll: false
+    credentials:
+      s3:
+        type: s3
+        url: "${S3URL}"
+        bucket: "${S3BUCKETNAME}"
+        accessKey: "${S3ID}"
+        secretKey: "${S3KEY}"
+        encrKey: "${S3KEY}"
+    ingress:
+        main:
+          ingressClassName: internal
+          enabled: true
+          integrations:
+            certManager:
+              enabled: true
+              certificateIssuer: domain-1-le-staging
+          hosts:
+            - host: lldap.${DOMAIN_1}
+    workload:
+      main:
+        podSpec:
+          containers:
+            main:
+              env:
+                LLDAP_HTTP_URL: https://lldap.${DOMAIN_1}
+                LLDAP_LDAP_BASE_DN: ${LLDAPDN}
+                LLDAP_LDAP_USER_DN: admin
+                LLDAP_LDAP_USER_EMAIL: admin@${DOMAIN_1}
+                LLDAP_LDAP_USER_PASS: ${AUTHPASS}
+                LLDAP_SMTP_OPTIONS__FROM: LLDAP Admin <lldap@${DOMAIN_1}>
+                LLDAP_SMTP_OPTIONS__PASSWORD: ${SMTPPASS}
+                LLDAP_SMTP_OPTIONS__PORT: 587
+                LLDAP_SMTP_OPTIONS__REPLY_TO: ${NOREPLYADDRESS}
+                LLDAP_SMTP_OPTIONS__SERVER: ${SMTPHOST}
+                LLDAP_SMTP_OPTIONS__SMTP_ENCRYPTION: TLS
+                LLDAP_SMTP_OPTIONS__USER: ${SMTPUSER}
+                LLDAP_VERBOSE: false
+                LLDAP_key_file: /data/private_key
+    cnpg:
+      main:
+        mode: standalone
+        cluster:
+          singleNode: true
+        backups:
+          enabled: true
+          credentials: s3
+          scheduledBackups:
+            - name: daily-backup
+              schedule: "0 5 0 * * *"
+              backupOwnerReference: self
+              immediate: true
+              suspend: false
+
+    persistence:
+      data:
+        volsync:
+          - name: config
+            type: restic
+            credentials: s3
+            dest:
+              enabled: true
+            src:
+              enabled: false
+              trigger:
+                schedule: 10 0 * * *
