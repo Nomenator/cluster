@@ -1,0 +1,117 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: authelia
+  namespace: authelia
+spec:
+  interval: 15m
+  chart:
+    spec:
+      chart: authelia
+      version: 31.0.0
+      sourceRef:
+        kind: HelmRepository
+        name: truecharts
+        namespace: flux-system
+      interval: 15m
+  timeout: 5m
+  maxHistory: 3
+  install:
+    createNamespace: true
+    remediation:
+      retries: 3
+  upgrade:
+    cleanupOnFail: true
+    remediation:
+      retries: 3
+  uninstall:
+    keepHistory: false
+  dependsOn:
+    - name: lldap
+      namespace: lldap
+  values:
+    credentials:
+      s3:
+        type: s3
+        url: "${S3URL}"
+        bucket: "${S3BUCKETNAME}"
+        accessKey: "${S3ID}"
+        secretKey: "${S3KEY}"
+        encrKey: "${S3KEY}"
+    ingress:
+        main:
+          enabled: true
+          ingressClassName: external
+          integrations:
+            certManager:
+              enabled: true
+              certificateIssuer: domain-0-le-staging
+          hosts:
+            - host: auth.${DOMAIN_0}
+    cnpg:
+      main:
+        mode: standalone
+        cluster:
+          singleNode: true
+        backups:
+          enabled: true
+          credentials: s3
+          scheduledBackups:
+            - name: daily-backup
+              schedule: "0 5 0 * * *"
+              backupOwnerReference: self
+              immediate: true
+              suspend: false
+    persistence:
+      config:
+        volsync:
+          - name: config
+            type: restic
+            credentials: s3
+            dest:
+              enabled: true
+            src:
+              enabled: false
+              trigger:
+                schedule: 10 0 * * *
+    authelia:
+      totp:
+        issuer: ${DOMAIN_0}
+      authentication_backend:
+        ldap:
+          address: ldap://lldap-ldap.lldap.svc.cluster.local:3890
+          base_dn: ${LLDAPDN}
+          user: uid=manager,ou=people,${LLDAPDN}
+          users_filter: (&(|({username_attribute}={input})({mail_attribute}={input}))(objectClass=person))
+          groups_filter: (member={dn})
+          password: ${MANAGERPASS}
+      access_control:
+        default_policy: 'deny'
+        rules:
+        - domain:
+            - ${DOMAIN_0}
+            - '*.${DOMAIN_0}'
+          policy: two_factor
+          subject:
+            - 'group:admin'
+      session:
+        cookies:
+          - domain: '${DOMAIN_0}'
+            authelia_url: 'https://auth.${DOMAIN_0}'
+            default_redirection_url: 'https://www.${DOMAIN_0}'
+      regulation:
+        find_time: 10m
+        ban_time: 12h
+      notifier:
+        smtp:
+          address: 'smtp://${SMTPHOST}:587'
+          username: ${SMTPUSER}
+          password: ${SMTPPASS}
+          sender: auth@${DOMAIN_0}
+          startup_check_address: auth@${DOMAIN_0}
+          disable_html_emails: true
+          tls:
+            server_name: ${SMTPHOST}
+            minimum_version: TLS1.2
+            skip_verify: false
