@@ -45,7 +45,7 @@ spec:
           integrations:
             certManager:
               enabled: true
-              certificateIssuer: domain-0-le-staging
+              certificateIssuer: domain-0-le-prod
           hosts:
             - host: lldap.${DOMAIN_0}
     workload:
