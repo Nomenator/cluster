@@ -3,6 +3,7 @@ kind: Kustomization
 resources:
   - authentik/ks.yaml
   - kubernetes-dashboard/ks.yaml
+  - jellyfin/ks.yaml
   - vaultwarden/ks.yaml
   - cloudflareddns/ks.yaml  
   - unifi/ks.yaml
