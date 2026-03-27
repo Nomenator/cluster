@@ -41,6 +41,10 @@ spec:
     ingress:
       main:
         enabled: true
+        auth:
+          type: "authentik"
+          internalHost: "authentik-http.authentik.svc.cluster.local:10230"
+          externalHost: "auth.${DOMAIN_0}"
         ingressClassName: internal
         integrations:
           certManager:
