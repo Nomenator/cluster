@@ -41,15 +41,17 @@ spec:
     ingress:
       main:
         enabled: true
-        auth:
-          type: "authentik"
-          internalHost: "authentik-http.authentik.svc.cluster.local:10230"
-          externalHost: "auth.${DOMAIN_0}"
-        ingressClassName: internal
+        ingressClassName: external
         integrations:
           certManager:
             enabled: true
             certificateIssuer: domain-0-le-staging
+          nginx:
+            enabled: true
+            auth:
+              type: "authentik"
+              internalHost: "authentik-http.authentik.svc.cluster.local:10230"
+              externalHost: "auth.${DOMAIN_0}"
         hosts:
           - host: antinetflix.${DOMAIN_0}
     persistence:
