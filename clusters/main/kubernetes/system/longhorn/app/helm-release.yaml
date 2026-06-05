@@ -37,6 +37,11 @@ spec:
       defaultClassReplicaCount: 3
     service:
       ui:
+        type: LoadBalancer
+        loadBalancerIP: ${LONGHORNIP}
+        integrations:
+          metallb:
+            enabled: true
         ports:
           main:
             port: 80
