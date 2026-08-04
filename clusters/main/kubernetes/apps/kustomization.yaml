@@ -8,3 +8,5 @@ resources:
   - cloudflareddns/ks.yaml  
   - unifi/ks.yaml
   - nextcloud/ks.yaml
+  - librespeed/ks.yaml
+  - pingvin/ks.yaml
