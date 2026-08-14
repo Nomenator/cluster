@@ -52,7 +52,7 @@ spec:
       main:
         cluster:
           singleNode: true
-        mode: standalone
+        mode: recovery
         backups:
           enabled: true
           credentials: s3
@@ -62,6 +62,9 @@ spec:
               backupOwnerReference: self
               immediate: true
               suspend: false
+        recovery:
+          method: object_store
+          credentials: s3
     persistence:
       config:
         enabled: true
