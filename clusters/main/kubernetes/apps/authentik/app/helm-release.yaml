@@ -84,7 +84,7 @@ spec:
       main:
         cluster:
           singleNode: true
-        mode: standalone
+        mode: recovery
         backups:
           enabled: true
           credentials: s3
@@ -99,6 +99,7 @@ spec:
       servermetrics:
         enabled: false
     redis:
+      mode: recovery
       backups:
         enabled: true
         credentials: s3

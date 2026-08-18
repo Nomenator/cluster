@@ -91,7 +91,7 @@ spec:
       main:
         cluster:
           singleNode: true
-        mode: standalone
+        mode: recovery
         backups:
           enabled: true
           credentials: s3
