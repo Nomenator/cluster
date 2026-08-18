@@ -82,8 +82,6 @@ spec:
             certificateIssuer: domain-0-le-prod
     cnpg:
       main:
-        cluster:
-          singleNode: true
         mode: recovery
         backups:
           enabled: true
@@ -94,6 +92,10 @@ spec:
               backupOwnerReference: self
               immediate: true
               suspend: false
+        recovery:
+          enabled: true
+          credentials: s3
+          method: object_store
     metrics:
       # FIXME: Metrics do not work yet
       servermetrics:
@@ -110,3 +112,7 @@ spec:
             backupOwnerReference: self
             immediate: true
             suspend: false
+      recovery:
+        enabled: true
+        credentials: s3
+        method: object_store
