@@ -54,7 +54,7 @@ spec:
         timeout: 10
         useSSL: true
         useTLS: true
-        username: ${NOREPLYADDRESS}
+        username: ${SMTPUSER}
       general:
         allowUserChangeEmail: true
         allowUserChangeName: true
