@@ -52,7 +52,7 @@ spec:
         password: ${SMTPPASS}
         port: 465
         timeout: 10
-        useSSL: true
+        useSSL: false
         useTLS: true
         username: ${SMTPUSER}
       general:
