@@ -66,6 +66,26 @@ spec:
         authMechanism: Login
       icons:
         cache: 0
+    persistence:
+      data:
+        volsync:
+        - name: data
+          type: restic
+          credentials: s3
+          dest:
+            enabled: true
+          src:
+            enabled: false
+    cnpg:
+      main:
+        mode: standalone
+        backups:
+          enabled: true
+          credentials: s3
+        recovery:
+          enabled: false
+          credentials: s3
+          method: object_store
     ingress:
       main:
         enabled: true
