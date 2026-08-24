@@ -91,7 +91,7 @@ spec:
       main:
         cluster:
           singleNode: true
-        mode: recovery
+        mode: standalone
         backups:
           enabled: true
           credentials: s3
@@ -102,7 +102,7 @@ spec:
               immediate: true
               suspend: false
         recovery:
-          enabled: true
+          enabled: false
           credentials: s3
           method: object_store
     ingress:
