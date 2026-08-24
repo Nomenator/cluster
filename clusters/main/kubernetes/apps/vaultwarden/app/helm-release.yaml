@@ -84,14 +84,14 @@ spec:
           dest:
             enabled: true
           src:
-            enabled: false
+            enabled: true
             trigger:
               schedule: 40 1 * * *
     cnpg:
       main:
         cluster:
           singleNode: true
-        mode: standalone
+        mode: recovery
         backups:
           enabled: true
           credentials: s3
@@ -101,6 +101,10 @@ spec:
               backupOwnerReference: self
               immediate: true
               suspend: false
+        recovery:
+          enabled: true
+          credentials: s3
+          method: object_store
     ingress:
       main:
         enabled: true
