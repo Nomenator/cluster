@@ -76,12 +76,20 @@ spec:
             enabled: true
           src:
             enabled: false
+            trigger:
+              schedule: 0 1 * * *
     cnpg:
       main:
         mode: standalone
         backups:
           enabled: true
           credentials: s3
+          scheduledBackups:
+            - name: daily-backup
+              schedule: "0 2 * * * *"
+              backupOwnerReference: self
+              immediate: true
+              suspend: false
         recovery:
           enabled: false
           credentials: s3
