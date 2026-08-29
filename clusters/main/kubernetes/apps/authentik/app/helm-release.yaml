@@ -88,7 +88,7 @@ spec:
           credentials: s3
           scheduledBackups:
             - name: daily-backup
-              schedule: "0 5 * * *"
+              schedule: "0 0 5 * *"
               backupOwnerReference: self
               immediate: true
               suspend: false
@@ -108,7 +108,7 @@ spec:
         retentionPolicy: "7d"
         scheduledBackups:
           - name: daily-backup
-            schedule: "0 5 * * *"
+            schedule: "0 0 5 * *"
             backupOwnerReference: self
             immediate: true
             suspend: false
