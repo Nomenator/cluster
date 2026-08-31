@@ -58,7 +58,7 @@ spec:
           credentials: s3
           scheduledBackups:
             - name: daily-backup
-              schedule: "0 5 0 * * *"
+              schedule: "0 0 10 * *"
               backupOwnerReference: self
               immediate: true
               suspend: false
@@ -77,7 +77,7 @@ spec:
           src:
             enabled: true
             trigger:
-              schedule: 10 1 * * *
+              schedule: 0 0 10 * *
       data:
         enabled: true
         type: nfs
@@ -94,7 +94,7 @@ spec:
           src:
             enabled: true
             trigger:
-              schedule: 20 1 * * *
+              schedule: 0 0 10 * *
     nextcloud:
       credentials:
         initialAdminUser: ${NCUSERNAME}
