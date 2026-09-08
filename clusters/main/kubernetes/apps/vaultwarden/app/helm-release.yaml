@@ -68,6 +68,7 @@ spec:
         cache: 0
     persistence:
       data:
+        enabled: true
         volsync:
         - name: data
           type: restic
@@ -75,9 +76,9 @@ spec:
           dest:
             enabled: true
           src:
-            enabled: false
+            enabled: true
             trigger:
-              schedule: 0 1 * * *
+              schedule: 0 0 10 * *
     cnpg:
       main:
         mode: standalone
@@ -86,14 +87,13 @@ spec:
           credentials: s3
           scheduledBackups:
             - name: daily-backup
-              schedule: "0 2 * * * *"
+              schedule: "0 0 10 * *"
               backupOwnerReference: self
               immediate: true
               suspend: false
         recovery:
-          enabled: false
-          credentials: s3
           method: object_store
+          credentials: s3
     ingress:
       main:
         enabled: true
