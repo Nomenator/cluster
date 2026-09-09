@@ -23,6 +23,48 @@ spec:
     crds: CreateReplace
     remediation:
       retries: 3
+  postRenderers:
+    - kustomize:
+      patches:
+        - target:
+          kind: Deployment
+          name: vaultwarden
+          patch: |
+            - op: replace
+              path: /spec/template/spec/containers/0/livenessProbe
+              value:
+                failureThreshold: 60
+                httpGet:
+                  path: /
+                  port: 8080
+                  scheme: HTTP
+                initialDelaySeconds: 150
+                periodSeconds: 45
+                successThreshold: 1
+                timeoutSeconds: 15
+            - op: replace
+              path: /spec/template/spec/containers/0/readinessProbe
+                failureThreshold: 60
+                httpGet:
+                  path: /
+                  port: 8080
+                  scheme: HTTP
+                initialDelaySeconds: 10
+                periodSeconds: 12
+                successThreshold: 2
+                timeoutSeconds: 15
+            - op: replace
+              path: /spec/template/spec/containers/0/startupProbe
+              value:
+                failureThreshold: 60
+                httpGet:
+                  path: /
+                  port: 8080
+                  scheme: HTTP
+                initialDelaySeconds: 10
+                periodSeconds: 5
+                successThreshold: 1
+                timeoutSeconds: 3
   values:
     credentials:
       s3:
@@ -38,7 +80,7 @@ spec:
       verifySignup: true
       requireEmail: true
       allowInvitation: true
-      defaultInviteName: "HomeOrg"
+      defaultInviteName: "Rykov Home Secure Vault"
       showPasswordHint: true
       enableWebVault: true
       # Restrict creation of orgs. Options are: 'all', 'none' or a comma-separated list of users.
@@ -89,7 +131,7 @@ spec:
             - name: daily-backup
               schedule: "0 0 10 * *"
               backupOwnerReference: self
-              immediate: true
+              immediate: false
               suspend: false
         recovery:
           method: object_store
