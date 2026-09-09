@@ -81,7 +81,7 @@ spec:
               schedule: 0 0 10 * *
     cnpg:
       main:
-        mode: standalone
+        mode: recovery
         backups:
           enabled: true
           credentials: s3
