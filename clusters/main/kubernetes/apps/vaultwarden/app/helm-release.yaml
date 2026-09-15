@@ -4,48 +4,6 @@ metadata:
   name: vaultwarden
   namespace: vaultwarden
 spec:
-  postRenderers:
-    - kustomize:
-      patches:
-        - target:
-          kind: Deployment
-          name: vaultwarden
-          patch: |
-            - op: replace
-              path: /spec/template/spec/containers/0/livenessProbe
-              value:
-                failureThreshold: 60
-                httpGet:
-                  path: /
-                  port: 8080
-                  scheme: HTTP
-                initialDelaySeconds: 150
-                periodSeconds: 45
-                successThreshold: 1
-                timeoutSeconds: 15
-            - op: replace
-              path: /spec/template/spec/containers/0/readinessProbe
-                failureThreshold: 60
-                httpGet:
-                  path: /
-                  port: 8080
-                  scheme: HTTP
-                initialDelaySeconds: 10
-                periodSeconds: 12
-                successThreshold: 2
-                timeoutSeconds: 15
-            - op: replace
-              path: /spec/template/spec/containers/0/startupProbe
-              value:
-                failureThreshold: 60
-                httpGet:
-                  path: /
-                  port: 8080
-                  scheme: HTTP
-                initialDelaySeconds: 10
-                periodSeconds: 5
-                successThreshold: 1
-                timeoutSeconds: 3
   interval: 15m
   chart:
     spec:
@@ -65,7 +23,6 @@ spec:
     crds: CreateReplace
     remediation:
       retries: 3
-  
   values:
     credentials:
       s3:
@@ -124,7 +81,7 @@ spec:
               schedule: 0 0 10 * *
     cnpg:
       main:
-        mode: recovery
+        mode: standalone
         backups:
           enabled: true
           credentials: s3
@@ -135,6 +92,7 @@ spec:
               immediate: false
               suspend: false
         recovery:
+          enabled: false
           method: object_store
           credentials: s3
     ingress:
