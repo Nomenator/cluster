@@ -30,17 +30,6 @@ spec:
     keepHistory: false
   values:
     controller:
-      affinity:
-        podAntiAffinity:
-          requiredDuringSchedulingIgnoredDuringExecution:
-            - podAffinityTerm:
-              labelSelector:
-                matchExpressions:
-                  - key: app.kubernetes.io/name
-                    operator: In
-                    values:
-                      - nginx-internal
-              topologyKey: kubernetes.io/hostname
       replicaCount: 2
       service:
         externalTrafficPolicy: Local
@@ -74,6 +63,7 @@ spec:
         proxy-busy-buffers-size: 32k
         ssl-protocols: TLSv1.3 TLSv1.2
         use-forwarded-headers: "true"
+        worker-processes: "2"
       metrics:
         enabled: true
         # serviceMonitor:
