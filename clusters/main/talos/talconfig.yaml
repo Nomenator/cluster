@@ -95,6 +95,7 @@ nodes:
                     - siderolabs/intel-ucode
                     - siderolabs/util-linux-tools
                     - siderolabs/iscsi-tools
+                    - siderolabs/vmtoolsd-guest-agent
       patches:
         - '@./patches/nvidia.yaml'
 controlPlane:
